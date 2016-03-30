@@ -98,7 +98,6 @@ void actionOnServerStatus(int serverStatus){
           while(!connectToServer()){
             Serial.print(".");
           }
-          serverConnected = true;
           Serial.println("\nConnected To Server");  
           while(!callApi()){
             Serial.print(".");
@@ -107,7 +106,6 @@ void actionOnServerStatus(int serverStatus){
       }
       break;
     case 3:
-      serverConnected = true;
       Serial.println("\nConnected To Server");  
       while(!callApi()){
         Serial.print(".");
@@ -123,7 +121,6 @@ void actionOnServerStatus(int serverStatus){
         while(!connectToServer()){
           Serial.print(".");
         }
-        serverConnected = true;
         Serial.println("\nConnected To Server");
         while(!callApi()){
           Serial.print(".");
@@ -143,8 +140,7 @@ boolean callApi() {
   Serial1.println("AT+CIPSEND=4,39");
   Serial1.println("GET /about HTTP/1.1\r\nHost: google.com\r\n\r\n");
   delay(5000);
-  espStatus = read_until_ESP("SEND OK");
-  read_API();
+  espStatus = read_API("SEND OK");
   delay(1000);
   if(espStatus){
     return true;

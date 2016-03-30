@@ -9,7 +9,6 @@
 
 boolean espStatus = false;
 boolean wifiConnected = false;
-boolean serverConnected = false;
 int serverStatus = 0;
 
 void setup()
@@ -25,7 +24,7 @@ void setup()
  
 void loop()
 {
-  if(wifiConnected && !serverConnected) {    
+  if(wifiConnected) {    
     checkServerStatus();
     if(serverStatus) {
       actionOnServerStatus(serverStatus);
@@ -39,7 +38,6 @@ void loop()
         while(!connectToServer()){
           Serial.print(".");
         }
-        serverConnected = true;
         Serial.println("\nConnected To Server");
         while(!callApi()){
           Serial.print(".");
