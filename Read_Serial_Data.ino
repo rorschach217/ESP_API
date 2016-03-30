@@ -1,17 +1,17 @@
 boolean read_until_ESP(char keyword[]){
-  //Serial.println();
+  Serial.println();
   char data_in[200];
   char *search;  
   byte i=0;
   byte data_length = 0;  
   while(Serial1.available()){
     data_in[i]=Serial1.read();
-    //Serial.print(data_in[i]);
+    Serial.print(data_in[i]);
     i++;
     data_length++;
     delay(30);
   }    
-  //Serial.println();
+  Serial.println();
   search = strstr(data_in, keyword);
   //Serial.print("Search : ");
   //Serial.println(search);
@@ -38,3 +38,4 @@ void read_API(){
     count--;
   }     
 }
+

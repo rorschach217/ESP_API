@@ -14,8 +14,12 @@ int serverStatus = 0;
 
 void setup()
 {
-  Serial.begin(115200); // serial port used for debugging
-  Serial1.begin(115200);  // your ESP's baud rate might be different      
+  Serial.begin(9600); // serial port used for debugging
+  Serial1.begin(9600);  // your ESP's baud rate might be different      
+  Serial.print("Setting Baud Rate to 9600");
+  while(!lowerBaudSet()){
+    Serial.print(".");
+  }
   Connect_To_Wifi();
 }
  
@@ -43,8 +47,10 @@ void loop()
       }
     }
   }else{
-    Serial.print("\nServer Status false");
+    Serial.print("\nWifi Connecction or Server Connection Failed");
+    Connect_To_Wifi();
   }
+  
   /*
    if(Serial1.available())  // check if the ESP is sending a message
   {

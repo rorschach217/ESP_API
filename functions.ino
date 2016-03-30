@@ -140,11 +140,23 @@ void actionOnServerStatus(int serverStatus){
 
 boolean callApi() {
   espStatus = false;
-  Serial1.println("AT+CIPSEND=4,8");
+  Serial1.println("AT+CIPSEND=4,39");
   Serial1.println("GET /about HTTP/1.1\r\nHost: google.com\r\n\r\n");
   delay(5000);
-  espStatus = read_until_ESP("OK");
+  espStatus = read_until_ESP("SEND OK");
   read_API();
+  delay(1000);
+  if(espStatus){
+    return true;
+  }   
+  return false;
+}
+
+boolean lowerBaudSet(){
+  espStatus = false;
+  Serial1.println("AT+UART_DEF=9600,8,1,0,0");
+  delay(1000);
+  espStatus = read_until_ESP("OK");
   delay(1000);
   if(espStatus){
     return true;
